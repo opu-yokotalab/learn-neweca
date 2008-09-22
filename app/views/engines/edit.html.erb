@@ -1,0 +1,20 @@
+<h1>Editing engine</h1>
+
+<% form_for(@engine) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :rule %><br />
+    <%= f.text_field :rule %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @engine %> |
+<%= link_to 'Back', engines_path %>

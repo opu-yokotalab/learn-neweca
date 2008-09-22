@@ -1,0 +1,22 @@
+<h1>Listing engines</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Rule</th>
+  </tr>
+
+<% for engine in @engines %>
+  <tr>
+    <td><%=h engine.name %></td>
+    <td><%=h engine.rule %></td>
+    <td><%= link_to 'Show', engine %></td>
+    <td><%= link_to 'Edit', edit_engine_path(engine) %></td>
+    <td><%= link_to 'Destroy', engine, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New engine', new_engine_path %>

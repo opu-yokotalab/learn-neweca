@@ -1,0 +1,19 @@
+<p>
+  <b>Name:</b>
+  <%=h @engine.name %>
+</p>
+
+<p>
+  <b>Rule:</b>
+  <%=h @engine.rule %>
+</p>
+
+<p><%=h @conditionList[0] %></p>
+<p><%=h @conditionList[1] %></p>
+<p><%=h @conditionList[2] %></p>
+
+<p><%=h @output %></p>
+<p><%=h @var %></p>
+
+<%= link_to 'Edit', edit_engine_path(@engine) %> |
+<%= link_to 'Back', engines_path %>
