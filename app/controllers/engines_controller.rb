@@ -21,8 +21,14 @@ class EnginesController < ApplicationController
 	conditions.gsub!(/\),/,'::')
 	conditions.gsub!(/\(/,',')
 	conditions.gsub!(/\)/,'')
+	# 以下追加
+	# where句の[]の除去，ルールの終わりの.の除去，束縛変数に対する評価を抽出
 	conditions.gsub!(/\]/,'')
 	conditions.gsub!(/\[/,'')
+	conditions.gsub!(/\.$/,'')
+	conditions.gsub!(/([A-Z]+[0-9]*[a-z]*[0-9]*\s*!=|<=|>=|==|<|>\s*[0-9]+)(,)/,'\1::')
+	conditions.gsub!(/([0-9]+\s*!=|<=|>=|==|<|>\s*[A-Z]+[0-9]*[a-z]*[0-9]*)(,)/,'\1::')
+
 	conditions = conditions.split(/::/)
 
 	@conditionList = conditions
@@ -47,7 +53,8 @@ class EnginesController < ApplicationController
 		# 条件式評価用　正規表現
 		reg = /(^[A-Z]+[0-9]*[a-z]*[0-9]*\s*)(!=|<=|>=|==|<|>)(\s*[0-9]+$)/ # ex.) Point <= 30
 		reg2 = /(^[0-9]+\s*)(!=|<=|>=|==|<|>)(\s*[A-Z]+[0-9]*[a-z]*[0-9]*$)/ # ex.) 30 >= Point
-		reg_where = /(.+)(!=|<=|>=|==|<|>)(.+)/	#test_name取得用
+		#test_name取得用正規表現
+		reg_where = /(.+)(!=|<=|>=|==|<|>)(.+)/
 		# 変数格納用テーブル
 		var_tbl = Array.new
 		while n < conditionList.length do
@@ -166,6 +173,7 @@ class EnginesController < ApplicationController
 				end
 			end
 			n += 1
+			@var = value1
 		end
 	
 		return true
